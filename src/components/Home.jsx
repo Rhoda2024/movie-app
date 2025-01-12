@@ -13,7 +13,6 @@ const Home = () => {
   const [genres, setGenres] = useState([]);
   const [releases,SetReleases]=useState([]);
   const [series, setSeries]=useState([]);
-  // const [recommends,setRecommends] = useState([]);
 
 
 const getMovie =async () =>{
@@ -117,40 +116,11 @@ console.log(series)
 
 
 
-// const getRecommendMovies =async () =>{
-//   try {
-//     setIsloading(true);
-
-//     const res = await axios.get(
-//       "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
-
-//       {
-//         headers: {
-//           accept: 'application/json',
-//           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk'
-//           },
-//       }
-//     );
-
-//     console.log("res", res.data)
-//     setRecommends(res.data.results.slice(0,8));
-    
-//   } catch (error) {
-//     setIsloading(false)
-//     console.log(error)
-//   }
-// };
-// console.log(recommends)
-
-
-
-
 useEffect(()=>{
   getMovie();
   fetchGenres();
   getNewRelease();
   getSeries();
-  // getRecommendMovies();
 },[]);
 
 const navigate = useNavigate();
@@ -175,7 +145,7 @@ const openDetails = (id) =>{
         <p>Loading...</p>
       ):(
        <div className='flex items-center justify-between '>
-        <div className='grid grid-cols-4 gap-[40px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[40px]'>
         {series.map((serie,index)=>(
           <ul key={index}>
             <li className='cursor-pointer list-none' onClick={()=>{
@@ -228,13 +198,13 @@ const openDetails = (id) =>{
         <p>Loading...</p>
        ):(
         
-        <div className='grid grid-cols-3 gap-7 pt-[1rem] '>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7 pt-[1rem] '>
         {pictures.map((picture, index) => (
           <li className='cursor-pointer list-none' key={index} onClick={()=>{
             openDetails(picture.id)
           }}>
           <div 
-          className='w-[450px] h-[400px] rounded-[1rem]'
+          className='max-w-[450px] h-[400px] rounded-[1rem]'
           style={{
             backgroundImage:`url(https://image.tmdb.org/t/p/original${picture.backdrop_path})`,
             backgroundRepeat:"no-repeat",
@@ -279,22 +249,22 @@ const openDetails = (id) =>{
     {/* New Release movies */}
     <div className='pt-[5rem] max-w-[1500px] m-auto px-[2rem]'>
 
-      <div className='flex justify-between items-center'>
-        <p className='font-bold text-[24px] pb-[1rem]'>New Release - Movies</p>
+      <div className=' le:flex justify-between items-center pb-[1rem]'>
+        <p className='font-bold text-[24px] '>New Release - Movies</p>
           <Link to="/SeeMoreNew"> <p className='flex items-center gap-1 text-[18px] hover:text-neutral-500 cursor-pointer'>View all <IoIosArrowRoundForward size={30} /></p></Link>
       </div>
 
       {isloading ? (
         <p>Loading...</p>
       ):(
-        <div className='grid grid-cols-4 gap-[32px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[32px]'>
         {releases.map((release,index)=>(
           <ul key={index}>
             <li className='cursor-pointer list-none' onClick={()=>{
               openDetails(release.id)
             }}>
 
-              <div className='w-[325px] h-[400px] rounded-[1rem]'
+              <div className='max-w-[325px] h-[400px] rounded-[1rem]'
               style={{
                 backgroundImage:`url(https://image.tmdb.org/t/p/original${release.poster_path})`,
                 backgroundRepeat:"no-repeat",
@@ -326,22 +296,22 @@ const openDetails = (id) =>{
     {/* New Release Series */}
     <div className='pt-[5rem] max-w-[1500px] m-auto px-[2rem]'>
 
-      <div className='flex justify-between items-center'>
-        <p className='font-bold text-[24px] pb-[1rem]'>New Release - Series</p>
+      <div className='le:flex justify-between items-center pb-[1rem]'>
+        <p className='font-bold text-[24px] '>New Release - Series</p>
           <Link to="/MoreSeries"> <p className='flex items-center gap-1 text-[18px] hover:text-neutral-500 cursor-pointer'>View all <IoIosArrowRoundForward size={30} /></p></Link>
       </div>
 
       {isloading ? (
         <p>Loading...</p>
       ):(
-        <div className='grid grid-cols-4 gap-[32px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[32px]'>
         {series.map((serie,index)=>(
           <ul key={index}>
             <li className='cursor-pointer list-none' onClick={()=>{
               openDetails(serie.id) 
               }}>
 
-             <div className='w-[325px] h-[400px] rounded-[1rem]'
+             <div className='max-w-[325px] h-[400px] rounded-[1rem]'
                 style={{
                   backgroundImage:`url(https://image.tmdb.org/t/p/original${serie.poster_path})`,
                   backgroundRepeat:"no-repeat",
@@ -371,53 +341,6 @@ const openDetails = (id) =>{
 
     </div>
     {/* end of new realese series */}
-
-
-
-    {/* Recommended Movies */}
-    {/* <div className='pt-[5rem] max-w-[1500px] m-auto px-[2rem]'>
-      <div className='flex justify-between items-center'>
-        <p className='font-bold text-[24px] pb-[1rem]'>Recommended</p>
-          <Link to="/MoreRecommend"> <p className='flex items-center gap-1 text-[18px] hover:text-neutral-500 cursor-pointer'>View all <IoIosArrowRoundForward size={30} /></p></Link>
-      </div>
-
-      {isloading ? (
-        <p>Loading...</p>
-      ):(
-        <div className='grid grid-cols-4 gap-[32px]'>
-        {recommends.map((recommend,index)=>(
-          <ul key={index}>
-            <li className='cursor-pointer list-none' onClick={()=>(
-              openDetails(recommend.id)
-            )}>
-
-               <div className='w-[325px] h-[400px] rounded-[1rem]'
-                style={{
-                  backgroundImage:`url(https://image.tmdb.org/t/p/original${recommend.poster_path})`,
-                  backgroundRepeat:"no-repeat",
-                  backgroundPosition:"center",
-                  backgroundSize:"cover",
-              }}>
-              </div>
-
-               <div className='flex items-center justify-between pt-4'>
-               <p className='text-white font-medium text-[18px]'>{recommend.title}{recommend.original_name}</p>
-
-               <div className='flex items-center gap-2'>
-                <p className='bg-red-700 w-fit px-2 py-1 font-medium text-[16px] rounded-md '>{recommend.original_language}</p>
-
-               <p className='border-[2px] py-1 px-2 rounded-lg border-red-700 flex items-center gap-2'><MdOutlineWatchLater size={25}/>3:12:00</p>
-               </div>
-             </div>
-
-            </li>
-          </ul>
-        ))}
-      </div>
-      )}
-
-    </div> */}
-     {/* end of Recommended Movies */}
 
 
 

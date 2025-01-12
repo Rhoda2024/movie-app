@@ -26,7 +26,7 @@ const HeroSection = () => {
         }
       );
 
-      const movies = response.data.results.slice(0, 4); // Fetch only 4 movies
+      const movies = response.data.results.slice(0, 4); 
       setMovies(movies);
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -70,7 +70,7 @@ const HeroSection = () => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
     }, 5000); // Change image every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    return () => clearInterval(interval); 
   }, [movies]);
 
   return (
@@ -94,21 +94,21 @@ const HeroSection = () => {
           >
             <div className="absolute w-full h-[100vh] bg-[rgba(0,0,0,0.4)]">
               {/* Buttons at the center of the image */}
-              <div className="absolute inset-0 flex items-center justify-center gap-4 z-10">
-                <button className="bg-red-800 text-white text-[24px] font-bold w-fit px-[1rem] py-[1rem] flex items-center gap-2">
+              <div className="absolute pt-[5rem] sm:inset-0 flex flex-wrap items-center justify-center gap-4 z-10">
+                <button className="bg-red-800 text-white le:text-[24px] font-bold w-fit sm:px-[1rem] sm:py-[1rem] flex items-center gap-2">
                   Watch Now <IoIosPlayCircle size={40} />
                 </button>
-                <button className="text-white text-[24px] font-bold w-fit py-[0.5rem] px-[0.5rem] border-[3px] border-red-800 flex items-center gap-2">
+                <button className="text-white le:text-[24px] font-bold w-fit sm:py-[0.5rem] sm:px-[0.5rem] border-[3px] border-red-800 flex items-center gap-2">
                   Watch Later <MdOutlineWatchLater size={40} />
                 </button>
               </div>
 
               <div className=" max-w-[1400px] flex flex-col gap-4 justify-end m-auto h-full pb-[11rem] px-[2rem]">
-                <h1 className="text-4xl font-bold text-white">
+                <h1 className=" text-[2rem] le:text-4xl font-bold text-white">
                   {movies[currentIndex]?.title || 'No Title Available'}
                 </h1>
 
-                <div className="flex items-center gap-[1rem]">
+                <div className="flex flex-wrap items-center gap-[1rem]">
                   <div className="text-white text-lg my-2">
                     {movies[currentIndex]?.genre_ids &&
                       movies[currentIndex]?.genre_ids.map((genreId) => (

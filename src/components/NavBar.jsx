@@ -55,7 +55,7 @@ const NavBar = () => {
   return (
     <div>
       {/* Desktop View */}
-      <div className="hidden lg:flex items-center justify-center gap-[2rem] pt-[1rem] pb-[2rem] bg-black text-white">
+      <div className="hidden lg:flex items-center justify-center gap-[1.5rem] pt-[1rem] pb-[2rem] bg-black text-white">
         <Link to="/" className="hover:underline">Home</Link>
         <Link to="" className="hover:underline">Genre</Link>
         <Link to="" className="hover:underline">Country</Link>
@@ -82,22 +82,25 @@ const NavBar = () => {
       </div>
 
       {/* Mobile View */}
+        <div className='flex justify-between items-center px-6'>
+       <Link to="/" className="hover:underline lg:hidden ">Home</Link>
+      
       <div className="flex flex-col gap-[5px] py-[2rem] gm:gap-[10px] lg:hidden" onClick={toggleView}>
         <div className="border w-[2rem] h-[2px] border-white"></div>
         <div className="border w-[2rem] h-[2px] border-white"></div>
         <div className="border w-[2rem] h-[2px] border-white"></div>
       </div>
+      </div>
 
       {view && (
-        <div className="flex flex-col items-center justify-center gap-[2rem] pt-[1rem] pb-[2rem] bg-black text-white">
-          <Link to="/" className="hover:underline">Home</Link>
+        <div className="flex flex-col justify-center items-center gap-[2rem] pt-[1rem] pb-[2rem] bg-black text-white">
           <Link to="" className="hover:underline">Genre</Link>
           <Link to="" className="hover:underline">Country</Link>
           <div className="flex items-center gap-2">
             <input
               type="text"
               placeholder="Search Movies...."
-              className="border-[2px] text-black py-[5px] px-[7rem] rounded-[15px] outline-none"
+              className="border-[2px] text-black py-[5px] px-[0rem] sm:px-[4rem] rounded-[15px] outline-none"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />

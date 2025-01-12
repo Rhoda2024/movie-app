@@ -92,14 +92,14 @@ const RecommendPage = () => {
         : popular;
 
     return (
-        <div className='grid grid-cols-4 gap-[32px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[32px]'>
               {content.map((item,index)=>(
                 <ul key={index}>
                   <li className='cursor-pointer list-none' onClick={()=>(
                     openDetails(item.id)
                   )}>
       
-                     <div className='w-[325px] h-[400px] rounded-[1rem]'
+                     <div className='max-w-[325px] h-[400px] rounded-[1rem]'
                       style={{
                         backgroundImage:`url(https://image.tmdb.org/t/p/original${item.poster_path})`,
                         backgroundRepeat:"no-repeat",
@@ -127,12 +127,12 @@ const RecommendPage = () => {
 
   return (
     <div className="max-w-[1500px] m-auto px-[2rem] pt-[2rem]">
-      <div className="flex justify-between pb-6">
+      <div className="flex flex-col le:flex-row le:items-center justify-between pb-6">
 
       {/* Header */}
-      <div className="flex items-center gap-8">
+      <div className=" flex flex-col le:flex-row gap-8">
         <p className="font-bold text-[24px] text-white">Recommended</p>
-        <div className="flex gap-4">
+        <div className="flex flex-col le:flex-row gap-4">
           <button
             onClick={() => setActiveTab("Movies")}
             className={`py-2 px-6 rounded-full text-sm font-semibold ${
@@ -168,7 +168,7 @@ const RecommendPage = () => {
 
       
       {/* View All Button */}
-      <div className="flex justify-end pt-4">
+      <div className="flex items-center justify-center pt-4">
         {activeTab === "Movies" && (
           <Link to="seeMoreNew" >
             <p className='flex items-center gap-1 text-[18px] hover:text-neutral-500 cursor-pointer'>View all <IoIosArrowRoundForward size={30} /></p>

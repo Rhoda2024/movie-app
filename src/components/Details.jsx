@@ -239,7 +239,7 @@ const getTvTrailer = async ()=>{
      <div className='bg-black text-white'>
        
        {isloading ? ("Loading...") : (trailerKey && (
-        <div className='max-w-[1400px] m-auto mt-10'>
+        <div className='max-w-[1400px] m-auto mt-10 px-[1rem]'>
           <ReactPlayer
           url={`https://www.youtube.com/watch?v=${trailerKey}`}
           width="100%"
@@ -255,20 +255,20 @@ const getTvTrailer = async ()=>{
             <div className="w-20 h-20 object-cover border-4 border-t-transparent border-white rounded-full animate-spin"></div>
           </div>
       ):(
-        <div className='flex max-w-[1400px] m-auto gap-[2rem] pt-[10rem] px-[2rem] '>
+        <div className='flex flex-col md:flex-row max-w-[1400px] m-auto gap-[2rem] pt-[10rem] px-[2rem] '>
 
           <div>
            <img src={`https://image.tmdb.org/t/p/original${responses.poster_path}`} alt={responses.title} 
-          className=" h-[550px] max-w-[500px] object-cover rounded-[1rem]"
+          className=" h-[550px] le:w-[500px] object-cover rounded-[1rem]"
           />
          </div>
-             <div className='w-[65%] flex flex-col gap-4'>
-             <div className='flex items-center gap-4 justify-between'>
+             <div className='md:w-[65%] flex flex-col gap-4'>
+             <div className='flex flex-wrap items-center gap-4 justify-between'>
                 <h1 className='text-[32px] font-bold pb-[3rem]'>{responses.title || responses.name}</h1>
                <p className='flex items-center justify-between bg-red-600 gap-2 font-medium text-[16px] py-4 px-3 rounded-[1rem]'><AiOutlinePlus />Add to Favourite</p>
              </div>
 
-               <div className='flex items-center gap-[1rem]'>
+               <div className='flex flex-wrap items-center gap-[1rem]'>
                 <p className=" flex items-center gap-4">
                 <div className="flex flex-wrap gap-2 font-semibold text-[16px]">
                    {responses.genres && responses.genres.length > 0  ? responses.genres.slice(0, 3).map((genre) => (
@@ -332,14 +332,14 @@ const getTvTrailer = async ()=>{
         {isloading ? (
           <p>Loading...</p>
         ):(
-          <div className='grid grid-cols-4 gap-10'>
+          <div className='grid grid-cols-1 le:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[32px]'>
         {similars.map((similar)=>(
           <ul key={similar.id}>
             <li className='cursor-pointer list-none'
             onClick={()=>openDetails(similar.id)}>
 
         <div 
-          className='w-[300px] h-[344px] rounded-[1rem]'
+          className='max-w-[300px] h-[344px] rounded-[1rem]'
           style={{
             backgroundImage:`url(https://image.tmdb.org/t/p/original${similar.poster_path})`,
             backgroundRepeat:"no-repeat",
@@ -373,14 +373,14 @@ const getTvTrailer = async ()=>{
         <div><p className='font-semibold text-[24px]'>Comments</p></div>
 
         {/* first comment */}
-        <div className='flex gap-[2rem] pt-[3rem] font-normal text-[18px]'>
+        <div className='flex flex-wrap gap-[2rem] pt-[3rem] font-normal text-[18px]'>
            <div>
             <img src={img1} alt="" />
           </div>
 
           <div>
             <p className='pb-3'>James</p>
-            <input type="text" placeholder='Write your comments here.....' className='text-black w-[816px] h-[72px] px-3 rounded-lg' />
+            <input type="text" placeholder='Write your comments here.....' className='text-black max-w-full h-[72px] px-3 rounded-lg' />
           </div>
 
         </div>
