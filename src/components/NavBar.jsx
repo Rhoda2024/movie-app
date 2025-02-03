@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { CgClose } from 'react-icons/cg';
-import { BiSearch } from 'react-icons/bi';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { CgClose } from "react-icons/cg";
+import { BiSearch } from "react-icons/bi";
 
 const NavBar = () => {
   const [view, setView] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [responses, setResponses] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showResults, setShowResults] = useState(false); 
+  const [showResults, setShowResults] = useState(false);
 
   const toggleView = () => {
     setView(!view);
@@ -23,16 +23,15 @@ const NavBar = () => {
         `https://api.themoviedb.org/3/search/multi?include_adult=false&language=en-US&page=1&query=${searchQuery}`,
         {
           headers: {
-            accept: 'application/json',
+            accept: "application/json",
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk',
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk",
           },
         }
       );
 
       setResponses(res.data.results);
-      setShowResults(true); 
-
+      setShowResults(true);
     } catch (error) {
       console.error(error);
     } finally {
@@ -41,24 +40,30 @@ const NavBar = () => {
   };
 
   const handleCloseResults = () => {
-    setShowResults(false); 
-    setResponses(null); 
-    setSearchQuery('');
+    setShowResults(false);
+    setResponses(null);
+    setSearchQuery("");
   };
 
   const navigate = useNavigate();
-  
-  const openDetails = (id) =>{
+
+  const openDetails = (id) => {
     navigate(`/details/${id}`);
   };
 
   return (
-    <div>
+    <div className="max-w-[1500px] m-auto px-[2rem]">
       {/* Desktop View */}
       <div className="hidden lg:flex items-center justify-center gap-[1.5rem] pt-[1rem] pb-[2rem] bg-black text-white">
-        <Link to="/" className="hover:underline">Home</Link>
-        <Link to="" className="hover:underline">Genre</Link>
-        <Link to="" className="hover:underline">Country</Link>
+        <Link to="/" className="hover:underline">
+          Home
+        </Link>
+        <Link to="" className="hover:underline">
+          Genre
+        </Link>
+        <Link to="" className="hover:underline">
+          Country
+        </Link>
 
         <div className="flex items-center gap-2">
           <input
@@ -72,30 +77,67 @@ const NavBar = () => {
             onClick={handleSearch}
             className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
           >
-            {isLoading ? 'Loading...' : <BiSearch/>}
+            {isLoading ? "Loading..." : <BiSearch />}
           </button>
         </div>
-        <Link to="/seeMoreNew" className="hover:underline">Movie</Link>
-        <Link to="/MoreSeries" className="hover:underline">Series</Link>
-        <Link to="" className="hover:underline">Animation</Link>
-        <Link to="" className="hover:underline">Login/Signup</Link>
+        <Link to="/seeMoreNew" className="hover:underline">
+          Movie
+        </Link>
+        <Link to="/MoreSeries" className="hover:underline">
+          Series
+        </Link>
+        <Link to="" className="hover:underline">
+          Animation
+        </Link>
+        <Link to="" className="hover:underline">
+          Login/Signup
+        </Link>
       </div>
 
       {/* Mobile View */}
-        <div className='flex justify-between items-center px-6'>
-       <Link to="/" className="hover:underline lg:hidden ">Home</Link>
-      
-      <div className="flex flex-col gap-[5px] py-[2rem] gm:gap-[10px] lg:hidden" onClick={toggleView}>
-        <div className="border w-[2rem] h-[2px] border-white"></div>
-        <div className="border w-[2rem] h-[2px] border-white"></div>
-        <div className="border w-[2rem] h-[2px] border-white"></div>
-      </div>
+      <div className="flex justify-between items-center px-6 ">
+        <Link to="/" className="hover:underline lg:hidden ">
+          Home
+        </Link>
+
+        <div
+          className="flex flex-col gap-[5px] py-[2rem] gm:gap-[10px] lg:hidden"
+          onClick={toggleView}
+        >
+          <div className="border w-[2rem] h-[2px] border-white"></div>
+          <div className="border w-[2rem] h-[2px] border-white"></div>
+          <div className="border w-[2rem] h-[2px] border-white"></div>
+        </div>
       </div>
 
       {view && (
-        <div className="flex flex-col justify-center items-center gap-[2rem] pt-[1rem] pb-[2rem] bg-black text-white">
-          <Link to="" className="hover:underline">Genre</Link>
-          <Link to="" className="hover:underline">Country</Link>
+        <div className="flex flex-col items-center gap-[2rem] pt-[8rem] pb-[2rem] bg-black text-white absolute z-10 w-full h-[70vh] top-[5rem] left-0">
+          <div className="flex items-center gap-[40px]">
+            <Link to="" className="hover:underline">
+              Genre
+            </Link>
+            <Link to="" className="hover:underline">
+              Country
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-[40px]">
+            <Link to="/seeMoreNew" className="hover:underline">
+              Movie
+            </Link>
+            <Link to="/MoreSeries" className="hover:underline">
+              Series
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-[40px]">
+            <Link to="" className="hover:underline">
+              Animation
+            </Link>
+            <Link to="" className="hover:underline">
+              Login/Signup
+            </Link>
+          </div>
           <div className="flex items-center gap-2">
             <input
               type="text"
@@ -108,36 +150,32 @@ const NavBar = () => {
               onClick={handleSearch}
               className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
             >
-              {isLoading ? 'Loading...' : <BiSearch/>}
+              {isLoading ? "Loading..." : <BiSearch />}
             </button>
           </div>
-          <Link to="/seeMoreNew" className="hover:underline">Movie</Link>
-          <Link to="/MoreSeries" className="hover:underline">Series</Link>
-          <Link to="" className="hover:underline">Animation</Link>
-          <Link to="" className="hover:underline">Login/Signup</Link>
         </div>
       )}
 
       {/* Display Search Results */}
       {showResults && (
-        <div className="bg-gray-800 text-white p-4 max-w-[70%] m-auto">
+        <div className="bg-gray-800 text-white p-4 w-[100%] z-10 m-auto absolute h-[70vh] top-[5rem] left-0">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold">Search Results:</h2>
             <button
               onClick={handleCloseResults}
               className="text-red-600 hover:underline"
             >
-              <CgClose size={30}/>
+              <CgClose size={30} />
             </button>
           </div>
-          <div className="mt-4 max-h-96  overflow-y-auto">
+          <div className="mt-4 max-h-[60vh]  overflow-y-auto">
             <ul className="space-y-4">
               {responses.map((item) => (
                 <li
                   key={item.id}
                   className="flex items-center gap-4 p-2 bg-black rounded hover:bg-gray-700 cursor-pointer"
-                  onClick={()=>{
-                    openDetails(item.id)
+                  onClick={() => {
+                    openDetails(item.id);
                   }}
                 >
                   <img
@@ -152,7 +190,7 @@ const NavBar = () => {
                     <p className="text-sm text-gray-400">
                       {item.overview
                         ? `${item.overview.substring(0, 100)}...`
-                        : 'No description available'}
+                        : "No description available"}
                     </p>
                   </div>
                 </li>

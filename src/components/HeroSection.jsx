@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoIosPlayCircle } from "react-icons/io";
 import { MdOutlineWatchLater } from "react-icons/md";
-import { FaRegCalendarDays } from 'react-icons/fa6';
+import { FaRegCalendarDays } from "react-icons/fa6";
 
 const HeroSection = () => {
   const [movies, setMovies] = useState([]);
@@ -16,20 +16,20 @@ const HeroSection = () => {
       setLoading(true);
 
       const response = await axios.get(
-        'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1',
+        "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
         {
           headers: {
-            accept: 'application/json',
+            accept: "application/json",
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk',
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk",
           },
         }
       );
 
-      const movies = response.data.results.slice(0, 4); 
+      const movies = response.data.results.slice(0, 4);
       setMovies(movies);
     } catch (error) {
-      console.error('Error fetching images:', error);
+      console.error("Error fetching images:", error);
     } finally {
       setLoading(false);
     }
@@ -41,9 +41,9 @@ const HeroSection = () => {
         "https://api.themoviedb.org/3/genre/movie/list?language=en-US",
         {
           headers: {
-            accept: 'application/json',
+            accept: "application/json",
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk',
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDM0ZWEyNjg4Mjc1ZmMyY2E1NDk4ZjE1ZjkwZTBlMCIsIm5iZiI6MTczMzEzOTg5MC4zOTM5OTk4LCJzdWIiOiI2NzRkOWRiMjEzYTdmMmRkMzU4MDYxNGEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nUDrAf7r-YUMMX7G584YAnWkwlxTJVoyOC9Ao7L8gSk",
           },
         }
       );
@@ -70,11 +70,11 @@ const HeroSection = () => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % movies.length);
     }, 5000); // Change image every 5 seconds
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [movies]);
 
   return (
-    <div>
+    <div className="relative">
       <div className="hero relative">
         {loading ? (
           <div className="flex items-center justify-center h-screen">
@@ -86,15 +86,15 @@ const HeroSection = () => {
             style={{
               backgroundImage: movies[currentIndex]?.backdrop_path
                 ? `url(https://image.tmdb.org/t/p/original${movies[currentIndex].backdrop_path})`
-                : 'none',
-              height: '90vh',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+                : "none",
+              height: "90vh",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           >
             <div className="absolute w-full h-[100vh] bg-[rgba(0,0,0,0.4)]">
               {/* Buttons at the center of the image */}
-              <div className="absolute pt-[5rem] sm:inset-0 flex flex-wrap items-center justify-center gap-4 z-10">
+              <div className="absolute pb-[15rem] inset-0 flex flex-wrap items-center justify-center gap-4">
                 <button className="bg-red-800 text-white le:text-[24px] font-bold w-fit sm:px-[1rem] sm:py-[1rem] flex items-center gap-2">
                   Watch Now <IoIosPlayCircle size={40} />
                 </button>
@@ -105,10 +105,10 @@ const HeroSection = () => {
 
               <div className=" max-w-[1400px] flex flex-col gap-4 justify-end m-auto h-full pb-[11rem] px-[2rem]">
                 <h1 className=" text-[2rem] le:text-4xl font-bold text-white">
-                  {movies[currentIndex]?.title || 'No Title Available'}
+                  {movies[currentIndex]?.title || "No Title Available"}
                 </h1>
 
-                <div className="flex flex-wrap items-center gap-[1rem]">
+                <div className="le:flex flex-wrap items-center gap-[1rem] hidden">
                   <div className="text-white text-lg my-2">
                     {movies[currentIndex]?.genre_ids &&
                       movies[currentIndex]?.genre_ids.map((genreId) => (
@@ -132,8 +132,15 @@ const HeroSection = () => {
                   </p>
                 </div>
 
-                <p className="text-white font-normal text-[1rem] max-w-[700px]">
-                  {movies[currentIndex]?.overview || 'No Description Available'}
+                <p className="text-white font-normal text-[1rem] max-w-[700px] le:hidden">
+                  {movies[currentIndex]?.overview
+                    ? movies[currentIndex]?.overview.slice(0, 200) +
+                      (movies[currentIndex]?.overview.length > 200 ? "..." : "")
+                    : "No Description Available"}
+                </p>
+
+                <p className="text-white font-normal text-[1rem] max-w-[700px] hidden le:flex ">
+                  {movies[currentIndex]?.overview || "No Description Available"}
                 </p>
               </div>
 
@@ -144,9 +151,7 @@ const HeroSection = () => {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-5 h-5 rounded-full ${
-                      currentIndex === index
-                        ? 'bg-white'
-                        : 'bg-gray-400'
+                      currentIndex === index ? "bg-white" : "bg-gray-400"
                     } cursor-pointer`}
                   ></div>
                 ))}
